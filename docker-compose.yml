@@ -1,9 +1,0 @@
-version: "2"
-
-services:
-  browser:
-    build: .
-    ports:
-     - "80:80"
-    volumes:
-     - ./:/var/www/html
