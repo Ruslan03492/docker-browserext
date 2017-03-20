@@ -12,6 +12,8 @@ RUN apt-get -y install \
     qt4-qmake \
     apache2 \
     php5-dev \
+    php5-mysql \
+    php5-gd \
     libapache2-mod-php5 \
     php5-mcrypt \
     xvfb \
