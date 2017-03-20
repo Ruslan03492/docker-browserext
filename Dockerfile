@@ -31,27 +31,6 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN sed -i 's/VirtualHost \*:80/VirtualHost \*:\*/' /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
-# Setup XDebug.
-RUN echo "xdebug.max_nesting_level = 300" >> /etc/php5/apache2/conf.d/20-xdebug.ini
-RUN echo "xdebug.max_nesting_level = 300" >> /etc/php5/cli/conf.d/20-xdebug.ini
-
-# Install Composer.
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
-
-# Install Drush 8.
-RUN composer global require drush/drush:8.*
-RUN composer global update
-# Unfortunately, adding the composer vendor dir to the PATH doesn't seem to work. So:
-RUN ln -s /root/.composer/vendor/bin/drush /usr/local/bin/drush
-
-# Install Drupal Console. There are no stable releases yet, so set the minimum 
-# stability to dev.
-RUN curl https://drupalconsole.com/installer -L -o drupal.phar && \
-    mv drupal.phar /usr/local/bin/drupal && \
-    chmod +x /usr/local/bin/drupal
-RUN drupal init
-
 RUN \
     echo "Xvfb :0 > /dev/null 2>&1 &" >> /etc/init.d/rc.local && \
     echo "export DISPLAY=:0.0" >> /etc/apache2/envvars && \
