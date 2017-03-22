@@ -14,6 +14,7 @@ RUN apt-get -y install \
     php5-dev \
     php5-mysql \
     php5-curl \
+    curl \
     php5-gd \
     libapache2-mod-php5 \
     php5-mcrypt \
@@ -35,7 +36,7 @@ RUN a2enmod rewrite
 RUN \
     echo "Xvfb :0 > /dev/null 2>&1 &" >> /etc/init.d/rc.local && \
     echo "export DISPLAY=:0.0" >> /etc/apache2/envvars && \
-    git clone https://github.com/scraperlab/browserext.git /opt/browserext && \
+    git clone https://github.com/Ruslan03492/browserext.git /opt/browserext && \
     cd /opt/browserext && \
     chmod -R 777 /opt/browserext && \
     ./build.sh && \
