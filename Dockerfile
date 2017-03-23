@@ -19,6 +19,7 @@ RUN apt-get -y install \
     libapache2-mod-php5 \
     php5-mcrypt \
     xvfb \
+    none \
     xfonts-100dpi \
     xfonts-75dpi \
     xfonts-scalable \
@@ -32,6 +33,12 @@ RUN sed -i 's/display_errors = Off/display_errors = On/' /etc/php5/cli/php.ini
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN sed -i 's/VirtualHost \*:80/VirtualHost \*:\*/' /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
+
+# Set locale.
+RUN locale-gen ru_RU.UTF-8
+ENV LANG='ru_RU.UTF-8' LANGUAGE='ru_RU:ru' LC_ALL='ru_RU.UTF-8'
+
+ENV TERM=xterm
 
 RUN \
     echo "Xvfb :0 > /dev/null 2>&1 &" >> /etc/init.d/rc.local && \
