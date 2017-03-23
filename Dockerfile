@@ -38,8 +38,6 @@ RUN a2enmod rewrite
 RUN locale-gen ru_RU.UTF-8
 ENV LANG='ru_RU.UTF-8' LANGUAGE='ru_RU:ru' LC_ALL='ru_RU.UTF-8'
 
-ENV TERM=xterm
-
 RUN \
     echo "Xvfb :0 > /dev/null 2>&1 &" >> /etc/init.d/rc.local && \
     echo "export DISPLAY=:0.0" >> /etc/apache2/envvars && \
@@ -50,6 +48,8 @@ RUN \
     ./install.sh && \
     echo "extension=browserext.so" >> /etc/php5/apache2/php.ini && \
     service apache2 restart
+
+ENV TERM=xterm
 
 WORKDIR /var/www/html
 
