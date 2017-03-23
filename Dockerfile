@@ -19,7 +19,7 @@ RUN apt-get -y install \
     libapache2-mod-php5 \
     php5-mcrypt \
     xvfb \
-    none \
+    nano \
     xfonts-100dpi \
     xfonts-75dpi \
     xfonts-scalable \
